@@ -424,6 +424,9 @@ ramips_board_detect() {
 	*"LDS76X8 MINI")
 		name="ldsmini"
 		;;
+	*"LDS76X8 PRO")
+		name="ldspro"
+		;;
 	*"Mediatek MT7621 evaluation board")
 		name="mt7621"
 		;;
