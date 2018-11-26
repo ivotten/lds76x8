@@ -1014,12 +1014,17 @@ endef
 Image/Build/Profile/MT7628=$(call BuildFirmware/Default4M/$(1),$(1),mt7628,MT7628)
 Image/Build/Profile/LDS-MINI-64MByte=$(call BuildFirmware/Default32M/$(1),$(1),lds76x8-mini-64MByte,LDS-MINI-64MByte)
 Image/Build/Profile/LDS-MINI-128MByte=$(call BuildFirmware/Default32M/$(1),$(1),lds76x8-mini-128MByte,LDS-MINI-128MByte)
+Image/Build/Profile/LDS-PRO-64MByte=$(call BuildFirmware/Default32M/$(1),$(1),lds76x8-pro-64MByte,LDS-PRO-64MByte)
+Image/Build/Profile/LDS-PRO-128MByte=$(call BuildFirmware/Default32M/$(1),$(1),lds76x8-pro-128MByte,LDS-PRO-128MByte)
+
 
 ifeq ($(SUBTARGET),mt7628)
 define Image/Build/Profile/Default
 	$(call Image/Build/Profile/MT7628,$(1))
 	$(call Image/Build/Profile/LDS-MINI-64MByte,$(1))
 	$(call Image/Build/Profile/LDS-MINI-128MByte,$(1))
+	$(call Image/Build/Profile/LDS-PRO-64MByte,$(1))
+	$(call Image/Build/Profile/LDS-PRO-128MByte,$(1))
 endef
 endif
 
