@@ -11,7 +11,7 @@ define KernelPackage/sdhci-mt7628-second
   TITLE:=mt7628 second sdcard driver
   FILES:=files/mtk_sd.ko
   AUTOLOAD:=$(call AutoProbe,mtk_sd,1)
-  DEPENDS:=+kmod-mmc
+  DEPENDS:=+kmod-mmc +kmod-sdhci
   KCONFIG:=\
 		CONFIG_MTK_MMC \
 		CONFIG_MTK_AEE_KDUMP=n \
