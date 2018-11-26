@@ -10,7 +10,7 @@ define Profile/LDS-MINI-64MByte
 	PACKAGES:=\
 		kmod-usb-core kmod-usb2 kmod-usb-ohci \
 		kmod-ledtrig-usbdev kmod-sdhci-mt7620 \
-		ap_client
+		ap_client maccalc
 endef
 
 define Profile/LDS-MINI-64MByte/Description
@@ -23,7 +23,7 @@ define Profile/LDS-MINI-128MByte
         PACKAGES:=\
                 kmod-usb-core kmod-usb2 kmod-usb-ohci \
                 kmod-ledtrig-usbdev kmod-sdhci-mt7620 \
-		ap_client
+		ap_client maccalc
 endef
 
 define Profile/LDS-MINI-128MByte/Description
