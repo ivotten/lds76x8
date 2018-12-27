@@ -105,6 +105,9 @@ rt2860v2_prepare_config() {
 	
 #获取设备的传输功率
 	config_get txpower $device txpower
+
+#获取单/双天线模式
+	config_get antnum $device antnum
 	
 #获取设备的HT（频宽）
 	config_get ht $device ht
@@ -140,10 +143,17 @@ rt2860v2_prepare_config() {
 
 #大于11的时候支持11-14号频道
 	[ "$channel" != "auto" ] && {
-	[ ${channel:-0} -ge 12 -a ${channel:-0} -le 13 ] && countryregion=1
-	[ ${channel:-0} -eq 14 ] && countryregion=31
+	countryregion=1
 	debug "channel=$channel countryregion=$countryregion"
 	}
+
+#单双天线模式，如果数值不为1或者2，默认启动双天线
+	if [ $antnum -eq '1' ]; then
+		iwpriv ra0 e2p 34=3411
+	else
+		iwpriv ra0 e2p 34=3422
+	fi
+		
 
 #获取虚拟接口的数量，并提前配置SSID
 for vif in $vifs; do
@@ -243,9 +253,9 @@ CountryRegion=${countryregion:-1}
 CountryRegionABand=7
 CountryCode=${country:-US}
 BssidNum=${ssid_num:-1}
-SSID1=${ssid1:-LDS76X8_SSID1}
-SSID2=${ssid2:-LDS76X8_SSID2}
-SSID3=${ssid3:-LDS76X8_SSID3}
+SSID1=${ssid1:-YDH_SSID1}
+SSID2=${ssid2:-YDH_SSID2}
+SSID3=${ssid3:-YDH_SSID3}
 SSID4=${ssid4:-YDH_SSID4}
 SSID5=
 SSID6=
@@ -557,9 +567,9 @@ enable_rt2860v2() {
 	
 	#检查并创建WiFi驱动配置链接
 	[ -f /etc/Wireless/RT2860/RT2860AP.dat ] || {
-	mkdir -p /etc/Wireless/RT2860/ 2>/dev/null              
-	touch /tmp/RT2860.dat                          
-	ln -s /tmp/RT2860.dat /etc/Wireless/RT2860/RT2860AP.dat 2>/dev/null 
+	mkdir -p /etc/Wireless/RT2860/ 2>/dev/null
+	touch /tmp/RT2860.dat
+	ln -s /tmp/RT2860.dat /etc/Wireless/RT2860/RT2860AP.dat 2>/dev/null
 	}
 
 	
@@ -859,6 +869,7 @@ detect_rt2860v2() {
 		set wireless.ra${i}.txpower=100
 		set wireless.ra${i}.ht=40
 		set wireless.ra${i}.country=CN
+		set wireless.ra${i}.antnum=2
 		set wireless.ra${i}.disabled=0
 
 		set wireless.ap=wifi-iface
