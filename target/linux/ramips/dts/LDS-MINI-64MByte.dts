@@ -45,6 +45,21 @@
 				ralink,group = "wdt";
 				ralink,function = "gpio";
 			};
+			uart1 {
+				ralink,group = "uart1";
+				ralink,function = "uart1";
+			};
+
+			uart2 {
+				ralink,group = "uart2";
+				ralink,function = "uart2";
+			};
+
+			uart3 {
+				ralink,group = "uart3";
+				ralink,function = "uart3";
+			};
+
 		};
 	};
 
